@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 import FormTransacion from "../components/Dashboard/FormTransaction";
 import { useNavigate, useParams } from "react-router-dom";
+import { API_URL } from "../config";
 
 export default function EditTransaction() {
     const { token, userId } = useContext(AuthContext);
@@ -18,7 +19,7 @@ export default function EditTransaction() {
     useEffect(() => {
         // Aquí podríamos cargar las categorías desde la API para mostrarlas en un select
         async function cargarCategorias() {
-            const res = await fetch('http://localhost:3001/categorias', {
+            const res = await fetch(`${API_URL}/categorias`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ export default function EditTransaction() {
     }, [id]);
 
     async function cargarTransaccion() {
-        const res = await fetch(`http://localhost:3001/transacciones/${id}`, {
+        const res = await fetch(`${API_URL}/transacciones/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +52,7 @@ export default function EditTransaction() {
     }
 
     async function editarTransaccion(datos) {
-        const resp = await fetch(`http://localhost:3001/transacciones/${id}`, {
+        const resp = await fetch(`${API_URL}/transacciones/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

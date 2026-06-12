@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import FormularioAuth from "../components/auth/FormularioAuth";
 import Swal from "sweetalert2";
+import { API_URL } from "../config";
 
 function Register() {
   const navigate = useNavigate();
 
   async function crearCuenta(datos) {
-    const resp = await fetch('http://localhost:3001/auth/registro', {
+    const resp = await fetch(`${API_URL}/auth/registro`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(datos)

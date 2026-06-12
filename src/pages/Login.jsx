@@ -4,13 +4,14 @@ import FormularioAuth from "../components/auth/FormularioAuth";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
+import { API_URL } from "../config";
 
 function Login() {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   async function corroborarDatos(datos) {
-    const resp = await fetch('http://localhost:3001/auth/login', {
+    const resp = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(datos)

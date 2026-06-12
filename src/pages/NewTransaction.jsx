@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 import FormTransacion from "../components/Dashboard/FormTransaction";
+import { API_URL } from "../config";
 
 function NewTransaction() {
     const { token, userId } = useContext(AuthContext);
@@ -19,7 +20,7 @@ function NewTransaction() {
     const navigate = useNavigate();
 
     async function crearTransaccion(datos) {
-        const resp = await fetch('http://localhost:3001/transacciones', {
+        const resp = await fetch(`${API_URL}/transacciones`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ function NewTransaction() {
     useEffect(() => {
         // Aquí podríamos cargar las categorías desde la API para mostrarlas en un select
         async function cargarCategorias() {
-            const res = await fetch('http://localhost:3001/categorias', {
+            const res = await fetch(`${API_URL}/categorias`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

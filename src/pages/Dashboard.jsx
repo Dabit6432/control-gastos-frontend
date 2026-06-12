@@ -2,6 +2,7 @@ import DashboardSection from "../components/Dashboard/DashboardSection";
 import TransactionsSection from "../components/Dashboard/TransactionsSection";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 function Dashboard() {
   const [balance, setBalance] = useState(0);
@@ -21,7 +22,7 @@ function Dashboard() {
 
   useEffect(() => {
     async function cargarResumen() {
-      const res = await fetch('http://localhost:3001/transacciones/resumen', {
+      const res = await fetch(`${API_URL}/transacciones/resumen`, {
         headers: { 'authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       const data = await res.json();
@@ -34,7 +35,7 @@ function Dashboard() {
 
   useEffect(() => {
     async function cargarTransacciones() {
-      const res = await fetch('http://localhost:3001/transacciones', {
+      const res = await fetch(`${API_URL}/transacciones`, {
         headers: { 'authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       const data = await res.json();
@@ -44,7 +45,7 @@ function Dashboard() {
   }, [idSeleccionada]);
 
   async function eliminarTransaccion(id) {
-    const res = await fetch(`http://localhost:3001/transacciones/${id}`, {
+    const res = await fetch(`${API_URL}/transacciones/${id}`, {
       method: 'DELETE',
       headers: { 'authorization': `Bearer ${localStorage.getItem('token')}` }
     });
